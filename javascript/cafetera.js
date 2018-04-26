@@ -1,9 +1,7 @@
 function Cafetera(){
   capacidadMaxima = 100;
   capacidadActual = 0;
-  this.actualizarCantidad = function(cant){
 
-  }
   this.llenarCafetera = function(){
     capacidadActual = capacidadMaxima;
     document.getElementById('totalcant').innerHTML = "Cantidad: " + capacidadActual;
@@ -13,25 +11,31 @@ function Cafetera(){
     document.getElementById('totalcant').innerHTML = "Cantidad: " + capacidadActual;
   };
   this.servirTaza = function(cant){
-    if(cant < capacidadActual){
-      //Si hay sufieciente para servir las tazas
+    if(cant <= capacidadActual){
+      //Si hay suficiente.
       capacidadActual -= cant;
     }else{
-      //Si no servimos las que se puedan
+      //Si no, servimos lo que se pueda.
       capacidadActual = 0;
     }
+
     document.getElementById('totalcant').innerHTML = "Cantidad: " + capacidadActual;
   }
 
 }
 
 window.onload = function(){
-var cafetera = new Cafetera(100,10);
-var botones = document.getElementsByTagName('button');
-botones[0].addEventListener('click', cafetera.llenarCafetera, false);
-botones[1].addEventListener('click', function (){
-  var cant = prompt("Introduzca cantidad para servir");
-  cafetera.servirTaza(cant);
-}, false);
-botones[2].addEventListener('click', cafetera.vaciarCafetera,false);
+  var cafetera = new Cafetera(); //Creamos objeto
+  var botones = document.getElementsByTagName('button');
+  botones[0].addEventListener('click', cafetera.llenarCafetera, false);//Añadimos los listener a los botones
+  botones[1].addEventListener('click', function (){
+    var cant = prompt("Introduzca cantidad para servir");
+    //Validamos si es un número o no
+    if(!isNaN(cant)){
+      cafetera.servirTaza(cant);
+    }else{
+      alert("Inserte un número como cantidad");
+    }
+  }, false);
+  botones[2].addEventListener('click', cafetera.vaciarCafetera,false);
 };
