@@ -31,10 +31,10 @@ window.onload = function(){
   botones[1].addEventListener('click', function (){
     var cant = prompt("Introduzca cantidad para servir");
     //Validamos si es un número o no
-    if(!isNaN(cant)){
+    if(!isNaN(cant) && cant>=0){
       cafetera.servirTaza(cant);
     }else{
-      alert("Inserte un número como cantidad");
+      alert("Inserte un número positivo como cantidad");
     }
   }, false);
   botones[2].addEventListener('click', cafetera.vaciarCafetera,false);
